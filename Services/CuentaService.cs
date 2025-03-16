@@ -1,6 +1,7 @@
 ﻿namespace Services
 {
     using Entities;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
     using RepositoryContracts;
     using ServiceContracts;
@@ -20,13 +21,13 @@
             _logger = logger;
         }
 
-        public ResponseOfGetCuentas GetCuentas()
+        public async Task<ResponseOfGetCuentas?> GetCuentasAsync()
         {
             try
             {
-                var cuentas = _cuentaRepository.GetCuentas();
+                var cuentas = await _cuentaRepository.GetCuentas()!.ToListAsync();
 
-                if (cuentas is null || !cuentas.Any()) return new();
+                if (cuentas is null || cuentas.Count == 0) return new();
 
                 return new()
                 {
@@ -43,7 +44,7 @@
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return new();
+                return null;
             }
         }
 
@@ -89,7 +90,7 @@
 
                 cuenta.IdEstado = (int)EstadosCuenta.Cerrada;
 
-                _cuentaRepository.UpdateCuenta(cuenta);
+                await _cuentaRepository.UpdateCuentaAsync(cuenta);
             }
             catch (Exception ex)
             {

@@ -18,10 +18,10 @@
             .Include(prop => prop.IdCuentaOrigenNavigation)
             .Include(prop => prop.IdCuentaDestinoNavigation);
 
-        public Transaccion CreateTransaccion(Transaccion transaccion)
+        public async Task<Transaccion> CreateTransaccionAsync(Transaccion transaccion)
         {
-            _dbContext.Transaccions.Add(transaccion);
-            _dbContext.SaveChanges();
+            await _dbContext.Transaccions.AddAsync(transaccion);
+            await _dbContext.SaveChangesAsync();
 
             return transaccion;
         }

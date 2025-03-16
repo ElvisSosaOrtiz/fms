@@ -14,7 +14,7 @@
             _dbContext = dbContext;
         }
 
-        public IQueryable<Cuentum>? GetCuentas()
+        public IQueryable<Cuentum> GetCuentas()
         {
             return _dbContext.Cuenta
                 .Include(prop => prop.IdTipoNavigation)
@@ -29,16 +29,16 @@
                 .FirstOrDefaultAsync(cuenta => cuenta.IdCuenta == id);
         }
 
-        public void UpdateCuenta(Cuentum cuenta)
+        public async Task UpdateCuentaAsync(Cuentum cuenta)
         {
             _dbContext.Cuenta.Update(cuenta);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void UpdateCuentas(Cuentum[] cuentas)
+        public async Task UpdateCuentasAsync(Cuentum[] cuentas)
         {
             _dbContext.Cuenta.UpdateRange(cuentas);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

@@ -24,6 +24,10 @@ public partial class MinisterioEducacionDfContext : DbContext
 
     public virtual DbSet<Transaccion> Transaccions { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-5QQG7I2\\SQLEXPRESS;Database=MinisterioEducacion_DF;Integrated Security=True;TrustServerCertificate=True");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Cuentum>(entity =>
@@ -46,13 +50,11 @@ public partial class MinisterioEducacionDfContext : DbContext
 
         modelBuilder.Entity<Movimiento>(entity =>
         {
-            entity.HasKey(e => e.IdMovimiento).HasName("PK__Movimien__2A071C24D54A18FB");
+            entity.HasKey(e => e.IdMovimiento).HasName("PK__Movimien__2A071C24D2FBA4AB");
 
-            entity.Property(e => e.IdMovimiento).ValueGeneratedNever();
+            entity.HasOne(d => d.IdCuentaDestinoNavigation).WithMany(p => p.MovimientoIdCuentaDestinoNavigations).HasConstraintName("FK__Movimient__id_cu__03F0984C");
 
-            entity.HasOne(d => d.IdCuentaDestinoNavigation).WithMany(p => p.MovimientoIdCuentaDestinoNavigations).HasConstraintName("FK__Movimient__id_cu__5629CD9C");
-
-            entity.HasOne(d => d.IdCuentaOrigenNavigation).WithMany(p => p.MovimientoIdCuentaOrigenNavigations).HasConstraintName("FK__Movimient__id_cu__5535A963");
+            entity.HasOne(d => d.IdCuentaOrigenNavigation).WithMany(p => p.MovimientoIdCuentaOrigenNavigations).HasConstraintName("FK__Movimient__id_cu__02FC7413");
         });
 
         modelBuilder.Entity<TipoCuentum>(entity =>
@@ -64,13 +66,11 @@ public partial class MinisterioEducacionDfContext : DbContext
 
         modelBuilder.Entity<Transaccion>(entity =>
         {
-            entity.HasKey(e => e.IdTransaccion).HasName("PK__Transacc__1EDAC09954C344B5");
+            entity.HasKey(e => e.IdTransaccion).HasName("PK__Transacc__1EDAC099DF5677DE");
 
-            entity.Property(e => e.IdTransaccion).ValueGeneratedNever();
+            entity.HasOne(d => d.IdCuentaDestinoNavigation).WithMany(p => p.TransaccionIdCuentaDestinoNavigations).HasConstraintName("FK__Transacci__id_cu__74AE54BC");
 
-            entity.HasOne(d => d.IdCuentaDestinoNavigation).WithMany(p => p.TransaccionIdCuentaDestinoNavigations).HasConstraintName("FK__Transacci__id_cu__52593CB8");
-
-            entity.HasOne(d => d.IdCuentaOrigenNavigation).WithMany(p => p.TransaccionIdCuentaOrigenNavigations).HasConstraintName("FK__Transacci__id_cu__5165187F");
+            entity.HasOne(d => d.IdCuentaOrigenNavigation).WithMany(p => p.TransaccionIdCuentaOrigenNavigations).HasConstraintName("FK__Transacci__id_cu__73BA3083");
         });
 
         OnModelCreatingPartial(modelBuilder);

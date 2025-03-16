@@ -7,8 +7,8 @@
     public interface ICuentaRepository
     {
         Task<Cuentum?> GetCuentaByIdAsync(int id);
-        IQueryable<Cuentum>? GetCuentas();
-        void UpdateCuenta(Cuentum cuenta);
-        void UpdateCuentas(Cuentum[] cuentas);
+        IQueryable<Cuentum> GetCuentas();
+        Task UpdateCuentaAsync(Cuentum cuenta);
+        Task UpdateCuentasAsync(Cuentum[] cuentas);
     }
 }

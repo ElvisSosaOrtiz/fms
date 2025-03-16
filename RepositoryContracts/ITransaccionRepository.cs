@@ -5,7 +5,7 @@
 
     public interface ITransaccionRepository
     {
-        Transaccion CreateTransaccion(Transaccion transaccion);
+        Task<Transaccion> CreateTransaccionAsync(Transaccion transaccion);
         IQueryable<Transaccion> GetTransacciones();
     }
 }

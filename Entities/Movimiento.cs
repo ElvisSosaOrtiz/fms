@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace Entities;
 
@@ -21,6 +18,9 @@ public partial class Movimiento
 
     [Column("monto")]
     public double? Monto { get; set; }
+
+    [Column("fecha")]
+    public DateOnly? Fecha { get; set; }
 
     [ForeignKey("IdCuentaDestino")]
     [InverseProperty("MovimientoIdCuentaDestinoNavigations")]

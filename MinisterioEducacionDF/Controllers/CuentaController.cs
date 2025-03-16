@@ -16,9 +16,12 @@
         }
 
         [HttpGet]
-        public IActionResult GetCuentas()
+        public async Task<IActionResult> GetCuentas()
         {
-            var result = _cuentaService.GetCuentas();
+            var result = await _cuentaService.GetCuentasAsync();
+
+            if (result is null) return StatusCode(500);
+
             return Ok(result);
         }
 
