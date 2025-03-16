@@ -17,9 +17,12 @@ namespace MinisterioEducacionDF.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetTransacciones(DateOnly fechaDesde, DateOnly fechaHasta)
+        public async Task<IActionResult> GetTransacciones(DateOnly fechaDesde, DateOnly fechaHasta)
         {
-            var result = _transaccionService.GetTransacciones(fechaDesde, fechaHasta);
+            var result = await _transaccionService.GetTransaccionesAsync(fechaDesde, fechaHasta);
+
+            if (result is null) return StatusCode(500);
+
             return Ok(result);
         }
 

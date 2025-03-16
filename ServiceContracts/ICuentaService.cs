@@ -6,7 +6,7 @@
     public interface ICuentaService
     {
         Task<ResponseOfGetCuentas.Cuenta?> GetCuentaByIdAsync(int id);
-        ResponseOfGetCuentas GetCuentas();
+        Task<ResponseOfGetCuentas?> GetCuentasAsync();
         Task CloseCuentaByIdAsync(int id);
     }
 }

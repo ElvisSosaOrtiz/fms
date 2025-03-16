@@ -20,8 +20,11 @@ builder.Services.AddDbContext<MinisterioEducacionDfContext>(options => options.U
 builder.Services
     .AddScoped<ICuentaRepository, CuentaRepository>()
     .AddScoped<ITransaccionRepository, TransaccionRepository>()
+    .AddScoped<IMovimientoRepository, MovimientoRepository>()
     .AddScoped<ICuentaService, CuentaService>()
-    .AddScoped<ITransaccionService, TransaccionService>();
+    .AddScoped<ITransaccionService, TransaccionService>()
+    .AddScoped<IMovimientoService, MovimientoService>()
+    .AddScoped<IResumenFinancieroService, ResumenFinancieroService>();
 
 var app = builder.Build();
 

@@ -8,6 +8,6 @@
     public interface ITransaccionService
     {
         Task<ResponseOfGetTransacciones.Transaccion?> CreateTransaccionAsync(RequestOfCreateTransaccion request);
-        ResponseOfGetTransacciones GetTransacciones(DateOnly fechaDesde, DateOnly fechaHasta);
+        Task<ResponseOfGetTransacciones?> GetTransaccionesAsync(DateOnly fechaDesde, DateOnly fechaHasta);
     }
 }
